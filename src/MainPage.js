@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import Dropdown from './Dropdown';
 import RangeInput from './RangeInput';
 import Recipe from './Recipe'
+import Recommendation from './Recommendation';
 
 
 const MainPage = ({brewingMethods, coffeeTypes}) => {
 
     // const brewingMethods = ['Aeropress', 'V60', 'Origami w/ Flat Filter', 'Origami w/ Cone Filter', 'Kalita'];
-    const [method, setMethod] = useState(brewingMethods[0]);
+    const [method, setMethod] = useState(brewingMethods[1]);
 
     // const coffeeTypes = ['Red Catuai Natural', 'Marsellesa Termico', 'Geisha Red Honey', 'Pacamara Honey'];
     const [coffee, setCoffee] = useState(coffeeTypes[0]);
@@ -25,22 +26,22 @@ const MainPage = ({brewingMethods, coffeeTypes}) => {
     // Handle selection change
     const handleBrewingMethodSelect = (method) => {
         setMethod(method)
-        console.log("Selected Brewing Method:", method);
+        // console.log("Selected Brewing Method:", method);
     };
 
     const handleCoffeeTypeSelect = (type) => {
         setCoffee(type)
-        console.log("Selected Coffee Type:", type);
+        // console.log("Selected Coffee Type:", type);
     };
 
     const handleGramsChange = (value) => {
         setGrams(value);
-        console.log("Range value:", value);
+        // console.log("Range value:", value);
     };
 
     const handleRatioChange = (value) => {
         setRatio(value)
-        console.log("Range value:", value);
+        // console.log("Range value:", value);
     };
 
     return (
@@ -86,6 +87,13 @@ const MainPage = ({brewingMethods, coffeeTypes}) => {
                 </div>
                 <Recipe recipeName={recipeName} method={method} coffee={coffee} grams={grams} ratio={ratio} />
                 
+            </div>
+
+            <br></br>
+            
+            <div className="container" style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <Recommendation type={'TMP'} method={method} coffee={coffee} grams={grams} ratio={ratio}/>
+                <Recommendation type={'C40'} method={method} coffee={coffee} grams={grams} ratio={ratio}/>
             </div>
         </div>
     );

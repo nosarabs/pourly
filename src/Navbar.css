@@ -9,4 +9,5 @@
 .nav-link {
     color: white !important;
     /* color: var(--bs-warning) !important; */
+    display: none !important;
 }

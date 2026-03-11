@@ -8,8 +8,8 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 function App() {
 
     // Default values for brewing methods and coffee types
-    const defaultBrewingMethods = ['Aeropress', 'V60', 'Origami w/ Flat Filter', 'Origami w/ Cone Filter', 'Kalita'];
-    const defaultCoffeeTypes = ['Red Catuai Natural', 'Marsellesa Termico', 'Geisha Red Honey', 'Pacamara Honey'];
+    const defaultBrewingMethods = ['Aeropress', 'V60', 'Origami', 'Kalita', 'Plinc','Graycano','UFO','Brewista Tornado'];
+    const defaultCoffeeTypes = ['Red Catuai Natural', 'Marsellesa Termico', 'Geisha Red Honey', 'Pacamara Honey', 'Pacamara Blackmoon', 'Anaerobic H15'];
 
     // Initialize state with values from local storage or defaults
     const [brewingMethods, setBrewingMethods] = useState(() => {
