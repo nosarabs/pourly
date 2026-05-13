@@ -1,16 +1,11 @@
 import React, { useState } from 'react';
 import Dropdown from './Dropdown';
 import RangeInput from './RangeInput';
-import Recipe from './Recipe'
+import Recipe from './Recipe';
 import Recommendation from './Recommendation';
 
-
-const MainPage = ({brewingMethods, coffeeTypes}) => {
-
-    // const brewingMethods = ['Aeropress', 'V60', 'Origami w/ Flat Filter', 'Origami w/ Cone Filter', 'Kalita'];
+const MainPage = ({ brewingMethods, coffeeTypes }) => {
     const [method, setMethod] = useState(brewingMethods[1]);
-
-    // const coffeeTypes = ['Red Catuai Natural', 'Marsellesa Termico', 'Geisha Red Honey', 'Pacamara Honey'];
     const [coffee, setCoffee] = useState(coffeeTypes[0]);
 
     const minGrams = 12;
@@ -23,77 +18,75 @@ const MainPage = ({brewingMethods, coffeeTypes}) => {
 
     const recipeName = '4:6';
 
-    // Handle selection change
-    const handleBrewingMethodSelect = (method) => {
-        setMethod(method)
-        // console.log("Selected Brewing Method:", method);
-    };
-
-    const handleCoffeeTypeSelect = (type) => {
-        setCoffee(type)
-        // console.log("Selected Coffee Type:", type);
-    };
-
-    const handleGramsChange = (value) => {
-        setGrams(value);
-        // console.log("Range value:", value);
-    };
-
-    const handleRatioChange = (value) => {
-        setRatio(value)
-        // console.log("Range value:", value);
-    };
+    const handleBrewingMethodSelect = (method) => setMethod(method);
+    const handleCoffeeTypeSelect = (type) => setCoffee(type);
+    const handleGramsChange = (value) => setGrams(value);
+    const handleRatioChange = (value) => setRatio(value);
 
     return (
-        <div className="container">
-
-            <div className="container">
-                <div>
-                    <Dropdown label={"Brewing Method"} options={brewingMethods} initialSelected={method} onSelect={handleBrewingMethodSelect}/>
-
-                    <br></br>
-
-                    <Dropdown label={"Variety & Process"} options={coffeeTypes} initialSelected={coffee} onSelect={handleCoffeeTypeSelect} />
-                </div>
+        <div className="space-y-6">
+            {/* Dropdowns Section */}
+            <div className="space-y-3">
+                <Dropdown
+                    label="Brewing Method"
+                    options={brewingMethods}
+                    initialSelected={method}
+                    onSelect={handleBrewingMethodSelect}
+                />
+                <Dropdown
+                    label="Variety & Process"
+                    options={coffeeTypes}
+                    initialSelected={coffee}
+                    onSelect={handleCoffeeTypeSelect}
+                />
             </div>
 
-            <br></br>
-
-            <div className="container">
+            {/* Sliders Section */}
+            <div className="space-y-5 rounded-2xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-surface-800 p-5 shadow-soft">
                 <div>
-                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <h6>Grams</h6>
-                        <h6>{grams}g</h6>
+                    <div className="flex items-center justify-between mb-2">
+                        <span className="text-xs font-semibold uppercase tracking-wider text-neutral-400 dark:text-neutral-500">
+                            Grams
+                        </span>
+                        <span className="text-sm font-bold text-brand-600 dark:text-brand-400 tabular-nums">
+                            {grams}g
+                        </span>
                     </div>
                     <RangeInput min={minGrams} max={maxGrams} step={0.1} initialValue={12} onChange={handleGramsChange} />
                 </div>
 
-                <br></br>
+                <div className="border-t border-neutral-100 dark:border-neutral-700/50" />
+
                 <div>
-                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <h6>Ratio</h6>
-                        <h6>1:{ratio}</h6>
+                    <div className="flex items-center justify-between mb-2">
+                        <span className="text-xs font-semibold uppercase tracking-wider text-neutral-400 dark:text-neutral-500">
+                            Ratio
+                        </span>
+                        <span className="text-sm font-bold text-brand-600 dark:text-brand-400 tabular-nums">
+                            1:{ratio}
+                        </span>
                     </div>
                     <RangeInput min={minRatio} max={maxRatio} step={1} initialValue={10} onChange={handleRatioChange} />
                 </div>
             </div>
 
-            <br></br>
-
-            <div className="container">
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <h5> Recipe </h5>
-                    <h5> <span className="badge text-bg-warning">{recipeName}</span> </h5>
+            {/* Recipe Section */}
+            <div>
+                <div className="flex items-center justify-between mb-3">
+                    <h2 className="text-base font-display font-bold text-neutral-800 dark:text-neutral-100">
+                        Recipe
+                    </h2>
+                    <span className="inline-flex items-center px-2.5 py-1 rounded-lg bg-brand-100 dark:bg-brand-900/40 text-brand-700 dark:text-brand-300 text-xs font-bold tracking-wide">
+                        {recipeName}
+                    </span>
                 </div>
                 <Recipe recipeName={recipeName} method={method} coffee={coffee} grams={grams} ratio={ratio} />
-                
             </div>
 
-            <br></br>
-            
-            <div className="container" style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <Recommendation type={'TMP'} method={method} coffee={coffee} grams={grams} ratio={ratio}/>
-                <Recommendation type={'C40'} method={method} coffee={coffee} grams={grams} ratio={ratio}/>
+            {/* Recommendations */}
+            <div className="flex gap-3">
+                <Recommendation type="TMP" method={method} coffee={coffee} grams={grams} ratio={ratio} />
+                <Recommendation type="C40" method={method} coffee={coffee} grams={grams} ratio={ratio} />
             </div>
         </div>
     );
